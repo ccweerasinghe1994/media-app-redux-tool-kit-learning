@@ -19,8 +19,8 @@ module.exports = {
 	'parserOptions': {
 		'ecmaVersion': 'latest',
 		'sourceType': 'module',
-		'project': 'true',
-		'tsconfigRootDir': __dirname,
+		project: true,
+		tsconfigRootDir: __dirname,
 	},
 	'plugins': [
 		'react',
@@ -46,12 +46,13 @@ module.exports = {
 		],
 		'prettier/prettier': 'error',
 	},
-	'settings': {
-		'react': {
-			'version': '18.2.0',
+	settings: {
+		react: {
+			version: '18.2.0',
 		},
 	},
 	'globals': {
 		'module': 'writable',
+
 	}
 };
