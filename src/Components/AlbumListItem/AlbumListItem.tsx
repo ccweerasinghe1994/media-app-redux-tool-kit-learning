@@ -7,6 +7,7 @@ import ExpandablePanel from '../ExpandablePanel/ExpandablePanel.tsx';
 import Button from '../Button/Button.tsx';
 import { GoTrash } from 'react-icons/go';
 import { toast } from 'sonner';
+import PhotoList from '../PhotoList/PhotoList.tsx';
 
 type TAlbumListItemProps = {
 	album: TAlbum;
@@ -35,7 +36,9 @@ const AlbumListItem: FC<TAlbumListItemProps> = ({ album }) => {
 			className={'w-3/4 mx-auto mt-10 py-1 border border-amber-600 shadow-xl'}
 			key={album.id}
 			header={header}>
-			<div className={'font-light text-gray-200'}>{album.name}</div>
+			<div className={'font-light text-gray-200'}>
+				<PhotoList album={album} />
+			</div>
 		</ExpandablePanel>
 	);
 };

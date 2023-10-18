@@ -15,7 +15,7 @@ const UserList = () => {
 	}, [doFetchUsers]);
 
 	const handleAddUser = () => {
-		doAdduser();
+		void doAdduser();
 	};
 	let content: ReactNode;
 	if (isUserListLoading) {

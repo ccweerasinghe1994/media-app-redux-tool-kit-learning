@@ -33,7 +33,7 @@ const AlbumList: FC<TAlbumListProps> = ({ user }) => {
 	}
 	if (albumList && albumList?.length === 0) {
 		toast.success('No albums found');
-		content = <div>No albums found</div>;
+		content = <div className={'text-gray-200'}>No albums found</div>;
 	}
 	if (albumList && albumList?.length > 0) {
 		content = albumList.map((album: TAlbum) => (
