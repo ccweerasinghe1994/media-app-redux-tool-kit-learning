@@ -26,11 +26,15 @@ const UserListItem: FC<{ user: TUser }> = ({ user }) => {
 				onClick={handleDelete}>
 				<GoTrash className={'text-2xl text-red-600 font-bold'} />
 			</Button>
-			<div className={'p-2'}>{user.name}</div>
+			<div className={'p-2 text-gray-100'}>{user.name}</div>
 		</>
 	);
 	return (
-		<ExpandablePanel header={header}>
+		<ExpandablePanel
+			className={
+				'mx-auto w-1/2 backdrop-blur-sm bg-red-500/10 shadow shadow-red-600 my-10 border-amber-600 hover:border-red-600 tracking-wide transition-all hover:shadow-red-700 hover:shadow '
+			}
+			header={header}>
 			<AlbumList user={user} />
 		</ExpandablePanel>
 	);

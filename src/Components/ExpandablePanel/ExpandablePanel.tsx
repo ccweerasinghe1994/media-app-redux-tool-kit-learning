@@ -5,19 +5,23 @@ import Button from '../Button/Button.tsx';
 type TAlbumListProps = {
 	header: ReactNode;
 	children: ReactNode;
+	className?: string;
 };
 
-const ExpandablePanel: FC<TAlbumListProps> = ({ header, children }) => {
+const ExpandablePanel: FC<TAlbumListProps> = ({
+	header,
+	children,
+	className,
+}) => {
 	const [show, setShow] = useState(false);
 	return (
-		<div className={'w-1/2 mx-auto border-2 mb-2'}>
+		<div className={`border-b-4  ${className}`}>
 			<div className={'flex justify-between items-center'}>
-				<div className={'mb-2 rounded flex items-center'}>{header}</div>
+				<div className={'rounded flex items-center'}>{header}</div>
 				<Button
 					outlined
-					type={'info'}
 					className={
-						'border-0 hover:border-2 hover:bg-blue-200 hover:text-white text-2xl'
+						'border-0 text-gray-100 hover:border-2 hover:bg-gray-200 hover:text-black text-2xl transition-all'
 					}
 					onClick={() => setShow((show) => !show)}>
 					{show ? <GoArrowDown /> : <GoArrowRight />}

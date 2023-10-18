@@ -1,22 +1,15 @@
 import { useEffect, ReactNode } from 'react';
-import {
-	adduser,
-	fetchUsers,
-	useAppDispatch,
-	useAppSelector,
-} from '../../store/store.ts';
+import { adduser, fetchUsers, useAppSelector } from '../../store/store.ts';
 import Skeleton from '../Skeleton/Skeleton.tsx';
 import Button from '../Button/Button.tsx';
 import { toast } from 'sonner';
-import { AxiosError } from 'axios';
-import { AsyncThunk } from '@reduxjs/toolkit';
 import { useThunk } from '../../store/hooks/useThunk.ts';
 import UserListItem from '../UserListItem/UserListItem.tsx';
 
 const UserList = () => {
 	const [doFetchUsers, isUserListLoading, userListError] = useThunk(fetchUsers);
 	const [doAdduser, isAddingUserLoading, addingUserError] = useThunk(adduser);
-	const { data } = useAppSelector((state) => state.user);
+	const { data: userList } = useAppSelector((state) => state.user);
 	useEffect(() => {
 		doFetchUsers();
 	}, [doFetchUsers]);
@@ -26,25 +19,33 @@ const UserList = () => {
 	};
 	let content: ReactNode;
 	if (isUserListLoading) {
-		content = <Skeleton className={'h-10 w-full'} times={10} />;
+		content = <Skeleton className={'h-10'} times={10} />;
 	} else if (userListError) {
 		toast.error('Error Fetching Data');
 		content = <div>Error Fetching Data</div>;
-	} else if (!data) {
+	} else if (!userList) {
 		content = <div>No data</div>;
-	} else if (data) {
-		content = data.map((user) => <UserListItem key={user.id} user={user} />);
+	} else if (userList) {
+		content = userList.map((user) => (
+			<UserListItem key={user.id} user={user} />
+		));
 	}
 	return (
-		<div>
-			<div className={'flex flex-row justify-between m-3'}>
-				<h1 className={'m-2 text-xl'}>Users</h1>
+		<>
+			<div
+				className={
+					'flex flex-row justify-between items-center px-10 py-3 backdrop-blur-sm bg-white/30 shadow-xl'
+				}>
+				<h1 className={'m-2 text-4xl font-mono tracking-wide text-gray-100'}>
+					Users
+				</h1>
 
 				<Button
 					loading={isAddingUserLoading}
 					onClick={handleAddUser}
-					type={'primary'}
-					size={'large'}>
+					type={'danger'}
+					size={'large'}
+					className={'px-8 py-5'}>
 					+ Add User
 				</Button>
 			</div>
@@ -54,7 +55,7 @@ const UserList = () => {
 			)}
 
 			{content}
-		</div>
+		</>
 	);
 };
 
